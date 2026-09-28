@@ -1,2 +1,1 @@
 # Boletim-digital
-boletim

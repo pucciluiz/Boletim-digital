@@ -1,0 +1,140 @@
+/* Configurações gerais da página */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #f4f7f6;
+    color: #2c3e50;
+    padding: 20px;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+/* Cabeçalho */
+.cabecalho {
+    text-align: center;
+    margin-bottom: 30px;
+    padding: 20px;
+    background-color: #2e7d32; /* Verde principal */
+    color: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.cabecalho h1 {
+    font-size: 2rem;
+    margin-bottom: 5px;
+}
+
+.subtitulo {
+    font-size: 1.1rem;
+    opacity: 0.9;
+}
+
+/* Cards de Resumo */
+.cards-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.card {
+    background: white;
+    padding: 18px;
+    border-radius: 10px;
+    text-align: center;
+    /* Sombra suave conforme você escolheu */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    border-top: 4px solid #2e7d32; /* Detalhe em verde */
+}
+
+.card-frequencia {
+    border-top-color: #f57c00; /* Detalhe em laranja para destaque */
+}
+
+.card h3 {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+.valor-card {
+    font-size: 1.6rem;
+    font-weight: bold;
+    color: #2e7d32;
+}
+
+.card-frequencia .valor-card {
+    color: #e65100;
+}
+
+.card small {
+    display: block;
+    font-size: 0.75rem;
+    color: #777;
+    margin-top: 4px;
+}
+
+/* Tabela Responsiva */
+.tabela-container {
+    background: white;
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    overflow-x: auto; /* Permite rolar para o lado no celular */
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+    min-width: 600px; /* Garante que a tabela não esmague no celular */
+}
+
+th, td {
+    padding: 12px 10px;
+    border-bottom: 1px solid #eee;
+}
+
+th {
+    background-color: #f8f9fa;
+    color: #2e7d32;
+    font-weight: bold;
+}
+
+/* Tags de Situação */
+.situacao-bom {
+    color: #2e7d32;
+    font-weight: bold;
+    background-color: #e8f5e9;
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+}
+
+.situacao-atencao {
+    color: #c62828;
+    font-weight: bold;
+    background-color: #ffebee;
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+}
+
+.situacao-indisponivel {
+    color: #757575;
+    background-color: #f5f5f5;
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+}
