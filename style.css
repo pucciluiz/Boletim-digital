@@ -194,6 +194,68 @@ body {
     margin-top: 4px;
 }
 
+/* Área de Gráficos (Grid Responsivo) */
+.area-graficos {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+    margin-bottom: 30px;
+}
+
+.card-grafico {
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    border-top: 4px solid #2e7d32;
+    display: flex;
+    flex-direction: column;
+}
+
+.card-grafico h3 {
+    font-size: 0.95rem;
+    color: #2e7d32;
+    margin-bottom: 12px;
+    text-align: center;
+}
+
+.cabecalho-grafico-faltas {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.cabecalho-grafico-faltas h3 {
+    margin-bottom: 0;
+}
+
+.badge-perigo {
+    background-color: #c62828;
+    color: white;
+    font-size: 0.75rem;
+    font-weight: bold;
+    padding: 3px 8px;
+    border-radius: 4px;
+    text-transform: uppercase;
+}
+
+.card-grafico.alerta-perigo {
+    border-top-color: #c62828;
+    box-shadow: 0 4px 12px rgba(198, 40, 40, 0.2);
+}
+
+.container-canvas {
+    position: relative;
+    width: 100%;
+    height: 260px;
+    flex: 1;
+}
+
+.container-canvas-alta {
+    height: 380px;
+}
+
 /* Tabela Responsiva */
 .tabela-container {
     background: white;
@@ -246,4 +308,21 @@ th {
     padding: 4px 8px;
     border-radius: 6px;
     font-size: 0.85rem;
+}
+
+/* Adaptabilidade para Tablet e Celular */
+@media (max-width: 900px) {
+    .area-graficos {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 600px) {
+    .area-graficos {
+        grid-template-columns: 1fr;
+    }
+    
+    .container-canvas-alta {
+        height: 320px;
+    }
 }

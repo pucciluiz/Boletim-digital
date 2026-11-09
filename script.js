@@ -29,6 +29,11 @@ let pinSessao = "";
 let dadosAtuais = [];
 let modoEdicao = false;
 
+// INSTÂNCIAS DOS GRÁFICOS (SOMENTE LEITURA E VISUALIZAÇÃO)
+let graficoMediasInstancia = null;
+let graficoEvolucaoInstancia = null;
+let graficoFaltasInstancia = null;
+
 // FUNÇÃO PARA NORMALIZAR NOTAS (converter para a escala 0 a 10)
 function normalizarNota(valor) {
     if (valor === null || valor === undefined || valor === "") {
@@ -227,6 +232,9 @@ function renderizarBoletim() {
     document.getElementById("total-faltas").innerText = totalFaltasGeral;
     document.getElementById("bom-desempenho").innerText = contadorBomDesempenho;
     document.getElementById("precisa-atencao").innerText = contadorAtencao;
+
+    // CHAMADA PONTUAL DOS GRÁFICOS APÓS RENDERIZAÇÃO
+    atualizarGraficos();
 }
 
 // MODOS DE EDIÇÃO
@@ -286,82 +294,6 @@ async function salvarAlteracoes() {
 
     for (let i = 0; i < dadosAtuais.length; i++) {
         const inputN1 = document.getElementById(`input-n1-${i}`);
-        const inputN2 = document.getElementById(`input-n2-${i}`);
-        const inputN3 = document.getElementById(`input-n3-${i}`);
-        const inputF1 = document.getElementById(`input-f1-${i}`);
-        const inputF2 = document.getElementById(`input-f2-${i}`);
-        const inputF3 = document.getElementById(`input-f3-${i}`);
-
-        [inputN1, inputN2, inputN3, inputF1, inputF2, inputF3].forEach(el => el.classList.remove("invalido"));
-
-        const valN1 = validarNotaDigitada(inputN1.value);
-        if (!valN1.valido) { inputN1.classList.add("invalido"); temErro = true; }
-
-        const valN2 = validarNotaDigitada(inputN2.value);
-        if (!valN2.valido) { inputN2.classList.add("invalido"); temErro = true; }
-
-        const valN3 = validarNotaDigitada(inputN3.value);
-        if (!valN3.valido) { inputN3.classList.add("invalido"); temErro = true; }
-
-        const valF1 = validarFaltaDigitada(inputF1.value);
-        if (!valF1.valido) { inputF1.classList.add("invalido"); temErro = true; }
-
-        const valF2 = validarFaltaDigitada(inputF2.value);
-        if (!valF2.valido) { inputF2.classList.add("invalido"); temErro = true; }
-
-        const valF3 = validarFaltaDigitada(inputF3.value);
-        if (!valF3.valido) { inputF3.classList.add("invalido"); temErro = true; }
-
-        novosDados.push({
-            disciplina: dadosAtuais[i].disciplina,
-            tri1: valN1.valor,
-            tri2: valN2.valor,
-            tri3: valN3.valor,
-            faltas: [valF1.valor, valF2.valor, valF3.valor]
-        });
-    }
-
-    if (temErro) {
-        msgSalvar.className = "mensagem-status erro";
-        msgSalvar.textContent = "Verifique os campos destacados em vermelho. Notas: 0 a 10. Faltas: números inteiros ≥ 0.";
-        return;
-    }
-
-    msgSalvar.className = "mensagem-status info";
-    msgSalvar.textContent = "Salvando...";
-
-    try {
-        const resposta = await fetch(`${CONFIG_ALUNO.apiUrl}/api/v1/boletins/salvar`, {
-            method: "PUT",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-                turma: CONFIG_ALUNO.turma,
-                numero_chamada: CONFIG_ALUNO.numeroChamada,
-                pin: pinSessao,
-                dados: {
-                    disciplinas: novosDados
-                }
-            })
-        });
-
-        if (!resposta.ok) {
-            msgSalvar.className = "mensagem-status erro";
-            msgSalvar.textContent = "Erro ao salvar alterações no servidor. Tente novamente.";
-            return;
-        }
-
-        dadosAtuais = novosDados;
-        modoEdicao = false;
-        document.getElementById("btn-alterar").style.display = "inline-block";
-        document.getElementById("btn-salvar").style.display = "none";
-        document.getElementById("btn-cancelar").style.display = "none";
-        msgSalvar.className = "mensagem-status sucesso";
-        msgSalvar.textContent = "Dados salvos com sucesso.";
-
-        renderizarBoletim();
-
-    } catch (erro) {
-        msgSalvar.className = "mensagem-status erro";
-        msgSalvar.textContent = "Falha na conexão ao salvar. Seus dados não foram perdidos.";
-    }
-}
+        const inputN2 = document.getElementById(`input-n2-${i}`); const inputN3 = document.getElementById(`input-n3-${i}`);
+        const inputF1 = document.getElementById(`input-f1-${i}`); const inputF2 = document.getElementById(`input-f2-${i}`);
+        const inputF3 = document.getElementById(`input-f3
