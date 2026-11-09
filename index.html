@@ -13,57 +13,80 @@
         <!-- Cabeçalho do Boletim -->
         <header class="cabecalho">
             <h1>Boletim Digital</h1>
-            <p class="subtitulo">Estudante Exemplo • 8º Ano</p>
+            <p class="subtitulo">Estudante • Turma 8B • Nº 20</p>
         </header>
 
-        <!-- Área de Cards de Resumo -->
-        <section class="cards-container">
-            <div class="card">
-                <h3>Média Geral</h3>
-                <p id="media-geral" class="valor-card">—</p>
+        <!-- Área de Login por PIN -->
+        <section id="area-login" class="area-login">
+            <h3>Acesso ao Boletim</h3>
+            <p>Informe seu PIN para acessar as notas:</p>
+            <div class="form-login">
+                <input type="password" id="input-pin" placeholder="Digite seu PIN" maxlength="20">
+                <button type="button" id="btn-entrar" onclick="fazerLogin()">Entrar</button>
             </div>
+            <p id="mensagem-login" class="mensagem-status"></p>
+        </section>
+
+        <!-- Conteúdo do Boletim (inicialmente oculto) -->
+        <div id="conteudo-boletim" style="display: none;">
             
-            <div class="card">
-                <h3>Total de Faltas</h3>
-                <p id="total-faltas" class="valor-card">—</p>
+            <!-- Barra de Ações (Editar / Salvar) -->
+            <div class="barra-acoes">
+                <button type="button" id="btn-alterar" onclick="ativarEdicao()">Alterar dados</button>
+                <button type="button" id="btn-salvar" onclick="salvarAlteracoes()" style="display: none;">Salvar alterações</button>
+                <button type="button" id="btn-cancelar" onclick="cancelarEdicao()" style="display: none;">Cancelar</button>
+                <span id="mensagem-salvar" class="mensagem-status"></span>
             </div>
 
-            <div class="card">
-                <h3>Bom Desempenho</h3>
-                <p id="bom-desempenho" class="valor-card">—</p>
-            </div>
+            <!-- Área de Cards de Resumo -->
+            <section class="cards-container">
+                <div class="card">
+                    <h3>Média Geral</h3>
+                    <p id="media-geral" class="valor-card">—</p>
+                </div>
+                
+                <div class="card">
+                    <h3>Total de Faltas</h3>
+                    <p id="total-faltas" class="valor-card">—</p>
+                </div>
 
-            <div class="card">
-                <h3>Precisa de Atenção</h3>
-                <p id="precisa-atencao" class="valor-card">—</p>
-            </div>
+                <div class="card">
+                    <h3>Bom Desempenho</h3>
+                    <p id="bom-desempenho" class="valor-card">—</p>
+                </div>
 
-            <div class="card card-frequencia">
-                <h3>Frequência</h3>
-                <p id="frequencia-geral" class="valor-card">92%</p>
-                <small id="status-frequencia">Frequência adequada</small>
-            </div>
-        </section>
+                <div class="card">
+                    <h3>Precisa de Atenção</h3>
+                    <p id="precisa-atencao" class="valor-card">—</p>
+                </div>
 
-        <!-- Tabela de Disciplinas e Notas -->
-        <section class="tabela-container">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Disciplina</th>
-                        <th>1º Tri</th>
-                        <th>2º Tri</th>
-                        <th>3º Tri</th>
-                        <th>Média</th>
-                        <th>Faltas</th>
-                        <th>Situação</th>
-                    </tr>
-                </thead>
-                <!-- O JavaScript vai preencher as linhas aqui dentro -->
-                <tbody id="corpo-tabela">
-                </tbody>
-            </table>
-        </section>
+                <div class="card card-frequencia">
+                    <h3>Frequência</h3>
+                    <p id="frequencia-geral" class="valor-card">92%</p>
+                    <small id="status-frequencia">Frequência adequada</small>
+                </div>
+            </section>
+
+            <!-- Tabela de Disciplinas e Notas -->
+            <section class="tabela-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Disciplina</th>
+                            <th>1º Tri</th>
+                            <th>2º Tri</th>
+                            <th>3º Tri</th>
+                            <th>Média</th>
+                            <th>Faltas</th>
+                            <th>Situação</th>
+                        </tr>
+                    </thead>
+                    <!-- O JavaScript vai preencher as linhas aqui dentro -->
+                    <tbody id="corpo-tabela">
+                    </tbody>
+                </table>
+            </section>
+        </div>
     </div>
 
     <!-- Conecta o HTML com o nosso script em JavaScript -->
